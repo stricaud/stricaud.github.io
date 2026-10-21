@@ -1,0 +1,22 @@
+---
+# Empty front matter, which is what tells Jekyll to run this through Sass.
+# Overriding the theme's variables has to happen *before* the import below,
+# which is the whole reason this file exists in the site rather than being
+# taken from the gem.
+---
+
+@charset "utf-8";
+
+// The theme stops the content column at 1280px. This blog is mostly code and
+// terminal output, where 80 columns of monospace plus the sticky table of
+// contents does not fit in what is left, so samples scrolled sideways.
+$max-width: 1600px;
+
+// The "On This Page" box gets a little more room too, so headings like
+// "Field names are mostly Wireshark's" stop wrapping mid-phrase.
+$right-sidebar-width-narrow: 240px;
+$right-sidebar-width: 320px;
+$right-sidebar-width-wide: 400px;
+
+@import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}";
+@import "minimal-mistakes";

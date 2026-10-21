@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 500" width="1600" height="500" role="img"
+     aria-label="Dissected packet output: HTTP, DNS and TLS summary lines">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0e1318"/>
+      <stop offset="1" stop-color="#1b232b"/>
+    </linearGradient>
+    <!-- Keeps the left side calm, where the title and excerpt sit. -->
+    <linearGradient id="scrim" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0"    stop-color="#0e1318" stop-opacity="0.97"/>
+      <stop offset="0.45" stop-color="#0e1318" stop-opacity="0.82"/>
+      <stop offset="1"    stop-color="#0e1318" stop-opacity="0.45"/>
+    </linearGradient>
+    <style>
+      .m { font-family: "SFMono-Regular", Menlo, Consolas, "Liberation Mono", monospace; font-size: 21px; }
+      .l { fill: #8fa3b5; }
+      .p { fill: #7fd1b9; }
+      .a { fill: #c7a86b; }
+    </style>
+  </defs>
+
+  <rect width="1600" height="500" fill="url(#bg)"/>
+
+  <!-- The output, as wallpaper: one muted palette, no window chrome, nothing
+       bright enough to argue with a headline sitting on top of it. -->
+  <g class="m" opacity="0.30" xml:space="preserve">
+    <text x="60" y="54"  class="l">$ ./sniff capture.pcapng</text>
+    <text x="60" y="104"><tspan class="l">   1  </tspan><tspan class="p">HTTP  </tspan><tspan class="l">203.0.113.9     -&gt; 10.0.0.5        </tspan><tspan class="a">GET /index.html HTTP/1.1</tspan></text>
+    <text x="60" y="144"><tspan class="l">   2  </tspan><tspan class="p">DNS   </tspan><tspan class="l">203.0.113.9     -&gt; 8.8.8.8         </tspan><tspan class="a">Query 0x1234 A example.com</tspan></text>
+    <text x="60" y="184"><tspan class="l">   3  </tspan><tspan class="p">TLS   </tspan><tspan class="l">203.0.113.9     -&gt; 10.0.0.5        </tspan><tspan class="a">Handshake Client Hello</tspan></text>
+    <text x="60" y="264"  class="l">$ ./sniff capture.pcapng 'http.uri contains "/index"'</text>
+    <text x="60" y="324"><tspan class="l">   1  </tspan><tspan class="p">HTTP  </tspan><tspan class="l">203.0.113.9     -&gt; 10.0.0.5        </tspan><tspan class="a">GET /index.html HTTP/1.1</tspan></text>
+    <text x="60" y="404"  class="l">$ ./sniff capture.pcapng 'tls.handshake_type == 1'</text>
+    <text x="60" y="464"><tspan class="l">   3  </tspan><tspan class="p">TLS   </tspan><tspan class="l">203.0.113.9     -&gt; 10.0.0.5        </tspan><tspan class="a">Handshake Client Hello</tspan></text>
+  </g>
+
+  <rect width="1600" height="500" fill="url(#scrim)"/>
+</svg>

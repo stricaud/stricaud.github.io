@@ -1,0 +1,50 @@
+# The theme as a gem, installed by bundler. `remote_theme` is for
+# GitHub's own Pages builder, which runs Jekyll 3.9 and will not start on
+# a current Ruby; this repository builds with Actions instead.
+theme: minimal-mistakes-jekyll
+minimal_mistakes_skin: "air"   # air, contrast, dark, dirt, neon, mint, plum, sunrise
+
+title: "Sebastien Tricaud"
+description: "Security with tons of tool kits!"
+url: "https://stricaud.github.io"
+repository: "stricaud/stricaud.github.io"
+
+author:
+  name: "Sebastien Tricaud"
+  bio: "Author of libpcapng, SightingDB, jackal and other stuff."
+  # Your GitHub profile picture, so there is no file to keep in the repo.
+  # A local path works too ("/assets/images/avatar.jpg"), and leaving
+  # this out entirely is fine: the sidebar then shows name and bio with
+  # no image, rather than a broken one.
+  avatar: "/assets/images/avatar.png"
+  links:
+    - label: "GitHub"
+      icon: "fab fa-fw fa-github"
+      url: "https://github.com/stricaud"
+
+permalink: /:categories/:title/
+
+plugins:
+  - jekyll-feed
+  - jekyll-include-cache
+  - jekyll-paginate
+  - jekyll-sitemap
+
+paginate: 10
+paginate_path: /page:num/
+
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: single
+      author_profile: true
+      read_time: true
+      comments: true
+      share: true
+      related: true
+      toc: true                # the "On This Page" box
+      toc_sticky: true
+
+include: ["_pages"]
