@@ -96,7 +96,7 @@ git clone https://github.com/stricaud/libpcapng
 cd libpcapng
 mkdir build && cd build
 cmake .. -DCMAKE_BUILD_TYPE=Release
-make -j$(nproc)
+make -j
 sudo make install
 ```
 
@@ -104,17 +104,7 @@ The bindings come from the same tree: `pip install pycapng` for Python,
 `go get github.com/stricaud/libpcapng/bindings/go` for Go, and
 [`libpcapng`](https://crates.io/crates/libpcapng) on crates.io for Rust.
 
-Everything below needs **0.19.5 or later** — that is where the packet reader
-and the dissection API arrived in the Python and Go bindings. If
-`pycapng.dissect` or `pcapng.ReadPackets` is missing, you are on something
-older.
-
-Go wants **0.19.7 or later** on top of that. Modules published before it
-carried their C sources in a directory called `vendor/`, and the module zip
-format drops any directory with that name — so `go get` fetched a binding with
-no library in it, and the build stopped at `'libpcapng/capture.h' file not
-found`. From a checkout it compiled perfectly, which is why it took a blog
-post to notice.
+Everything below needs **0.19.7 or later** 
 
 ### A capture to test against
 
@@ -154,16 +144,12 @@ p.CloseFile()
 ```
 
 Note `OpenFileLinkType` rather than `OpenFile`: every `Build*` helper returns a
-complete Ethernet frame, and the file has to say so. Up to and including
-0.19.5, plain `OpenFile` declared the interface as raw IP, which means every
-reader — Wireshark included — decoded from the wrong offset and showed you
-confident nonsense. Nothing errored.
+complete Ethernet frame, and the file has to say so. 
 
-Ethernet is the default from 0.19.6, so `OpenFile` is fine there; being
-explicit still is not wasted, because the day you write something that is
-*not* Ethernet, the file has to say so. A capture whose interface disagrees
-with its packets is the single easiest way to waste an afternoon with this
-library.
+Ethernet is the default, so `OpenFile` is fine there; being explicit still is 
+not wasted, because the day you write something that is *not* Ethernet, 
+the file has to say so. A capture whose interface disagrees with its packets 
+is the single easiest way to waste an afternoon with this library.
 
 ## C
 
