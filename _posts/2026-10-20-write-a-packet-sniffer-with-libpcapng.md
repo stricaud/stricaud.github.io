@@ -16,7 +16,7 @@ header:
   # Banner across the top of the post. overlay_filter darkens it so the title
   # stays readable; drop it if the image is already dark enough.
   overlay_image: /assets/images/sniffer-teaser.svg
-  overlay_filter: 0.6
+  overlay_filter: 0.4
   # Used in listings — but only where entries are laid out as a grid
   # (`entries_layout: grid`), not in the default list. Also what the social
   # card falls back to when a link to this post is unfurled.
@@ -46,6 +46,19 @@ and the display-filter engine *inside the library*. Same filter syntax as
 Wireshark's, same field names, applied to a file you just read or to a live
 interface. This post builds the smallest useful sniffer on top of that — the
 one that prints what each packet *is* — three times over, in C, Python and Go.
+
+## How the pieces fit
+
+{% include figure image_path="/assets/images/libpcapng-architecture.svg"
+   alt="libpcapng architecture: sources feed a block layer, then the dissector, the field tree and the display filter, with the C, Rust, Python and Go bindings underneath"
+   caption="The library, end to end. Everything in this post uses the left-hand column as its source and stops at the display filter; the rest is there when you need it." %}
+
+The shape worth remembering is the middle column. Bytes arrive from a file, an
+interface, or a buffer you already hold; the block layer turns them into
+packets with their link type and timestamp resolved; the dissector builds a
+field tree; and a compiled display filter walks that tree. The bindings are
+thin — each one carries the same C sources, which is why `pip install`,
+`go get` and `cargo add` need nothing on the machine first.
 
 ## What we are building
 
