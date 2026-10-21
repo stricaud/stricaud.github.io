@@ -33,7 +33,12 @@ jobs:
           ruby-version: "3.3"
           bundler-cache: true   # needs Gemfile.lock committed
 
+      # enablement: true turns Pages on for the repository the first time this
+      # runs, instead of failing with "Get Pages site failed" until someone
+      # flips Settings → Pages → Source → GitHub Actions by hand.
       - uses: actions/configure-pages@v5
+        with:
+          enablement: true
 
       - run: bundle exec jekyll build
         env:
